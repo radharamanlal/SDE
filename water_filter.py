@@ -37,7 +37,7 @@ def add_watermark(in_path,out_path,watermark_text):
             pos_x = base.width - text_width - 10
             pos_y = base.height - text_height - 10
             #Draw text with 50% opacity
-            d.text((pos_x, pos_y), watermark_text, font=font, fill=(255,255,255,128))
+            d.text((pos_x, pos_y), watermark_text, font=font,fill=(255,255,255,128))
             #Combine base image with text
             watermarked = Image.alpha_composite(base, txt)
             watermarked.convert("RGB").save(out_path)
