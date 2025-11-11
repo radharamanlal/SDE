@@ -37,7 +37,7 @@ def callback(ch,method, properties,body):
         # 1. Parse the job message
         message = json.loads(body)
         image_id = message['image_id']
-        image_path = message['image_path']
+        image_path = message['original_path']
         print(f"Processing image_id: {image_id}, image_path: {image_path}")
         # 2. Define the new output path
         resized_path= os.path.join(RESIZE_FOLDER,image_id)
@@ -46,7 +46,7 @@ def callback(ch,method, properties,body):
             # 4 create bext job message      
             new_message={
                 'image_id':image_id,
-                'image_path':image_path,
+                'original_path':image_path,
                 'resized_path':resized_path
             }
             # Publish to the next queue (for watermarking fillter)
@@ -93,5 +93,5 @@ def main():
         print("Interrupted by user, shutting down,stopping filter...")
         sys.exit(0)
         
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
