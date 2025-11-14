@@ -26,17 +26,17 @@ The data flows as follows:
 (Flask API)     (RabbitMQ)            (Consumer)              (RabbitMQ)             (Consumer)
 ```
 
-## ✨ Key Architectural Concepts
+##  Architectural Concepts
 
-[cite_start]This project is a practical application of key software architecture principles from *Software Architecture in Practice* [cite: 2] [cite_start]and our course slides[cite: 2950, 2952]:
+[cite_start]This project is a  application for implementing key software architecture principles for SDE assignment  [cite: 2] [cite_start]and our course slides[cite: 2950, 2952]:
 
-* [cite_start]**Pipe-and-Filter Pattern:** The core architecture[cite: 2994]. Each processing step is a filter, and queues act as pipes.
-* **Decoupling & Modifiability:** Filters are completely independent. [cite_start]We can add a new `FaceBlurFilter` between the resize and watermark steps without modifying *any* existing code—we just re-wire the queue outputs[cite: 1794].
-* **Scalability:** The `resize_filter.py` is slow? We can run 10 instances of it. RabbitMQ will automatically load-balance jobs across all running consumers (Competing Consumers pattern). [cite_start]This allows us to scale only the bottleneck, which is a core tenant of good architecture[cite: 1420].
+* [cite_start]**Pipe-and-Filter Pattern:** The main architecture[cite: 2994]. Each processing step is a filter, and queues act as pipes.
+* **Decoupling & Modifiability:** Filters are completely independent. [cite_start]We can add a new `FaceBlurFilter` between the resize and watermark steps without modifying *any* existing code—we just plugin  the queue outputs[cite: 1794].
+* **Scalability:** The `resize_filter.py` is slow? We can run multiple instances of it. RabbitMQ will automatically load-balance jobs across all running consumers . [cite_start]This allows us to scale only the bottleneck, which one of the essential attribute of good architecture[cite: 1420].
 * **Reliability & Fault Tolerance:**
     * [cite_start]**Persistence:** By declaring queues as `durable=True` and marking messages as persistent, jobs are not lost even if the RabbitMQ broker restarts[cite: 95].
     * **Acknowledgments:** A job is removed from the queue only after a filter successfully processes it and sends an `basic_ack`. If a filter crashes mid-process, the message is automatically re-queued and processed by another instance.
-* [cite_start]**Asynchronous Processing:** The user's upload request returns in milliseconds with a `200 OK`[cite: 915], even if the processing takes 30 seconds. This provides a responsive user experience.
+* [cite_start]**Asynchronous Processing:** The user's upload request returns in milliseconds with a `200 OK`[cite: 915], even if the processing takes few seconds. This provides a responsive user experience.
 
 ## 🛠️ Technology Stack
 
@@ -47,7 +47,7 @@ The data flows as follows:
 * **RabbitMQ**: The message broker (the "Pipes").
 * **Docker**: Used to easily run the RabbitMQ broker.
 
-## 🚀 Setup & Installation
+##  Setup & Installation
 
 ### 1. Clone the Repository
 
@@ -85,7 +85,7 @@ docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 * `5672` is the port for the Python apps.
 * `15672` is for the web management UI (open `http://localhost:15672` in your browser. Login: `guest`/`guest`).
 
-## 🏃 How to Run the Pipeline
+##  How to Run the Pipeline
 
 You must have **three separate terminals** open, one for each component.
 
@@ -135,11 +135,11 @@ curl -X POST -F "file=@test.png" [http://127.0.0.1:5000/upload](http://127.0.0.1
     * `./resized_images/` will have the resized version.
     * `./watermarked/` will have the final, watermarked version.
 
-## 🔮 Future Improvements
+##  Future Improvements
 
-This project demonstrates the core concept, but a production-ready system would add:
-* **Dead-Letter Queues (DLQs):** If a file is corrupt and a filter fails 3 times, the message should be moved to a `_error_queue` for inspection instead of blocking the pipeline.
-* **Centralized Logging:** Logging from all three services should be aggregated.
+This project demonstrates the concept of pipe and filter, but a production-ready system would require significant effort in following aspects:
+* **Dead-Letter Queues (DLQs):** If a file is corrupt and a filter fails miltiple times (lets say 3 times, the message should be moved to a `_error_queue` for inspection instead of blocking the pipeline.
+* **Centralized Logging:** Logging from all three services should be club togehter into one logger.
 * **Shared Storage:** The local folders (`uploads/`, etc.) won't work if you scale. These should be replaced with a shared volume or cloud storage (like Amazon S3).
 * **Configuration Management:** Hard-coded values (`localhost`, queue names) should be moved to environment variables.
 ````
