@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs
+.vscode/
+.idea/
+
+# Generated Images - DO NOT COMMIT
+uploads/
+resized_images/
+watermarked_images/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+
+# OS
+.DS_Store
+Thumbs.db
