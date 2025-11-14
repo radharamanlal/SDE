@@ -4,7 +4,7 @@
 
 It implements a scalable, asynchronous pipeline in Python to process image uploads. Instead of a single, monolithic application, the system is broken down into decoupled services that communicate using a RabbitMQ message broker.
 
-## 🏛️ Architectural Overview
+##  Architectural Overview
 
 [cite_start]The system follows a classic **Pipe-and-Filter** design[cite: 2953, 2957, 2994]. The "pipes" are not in-memory function calls but **asynchronous message queues** (RabbitMQ), which makes the system resilient, scalable, and modifiable.
 
@@ -38,7 +38,7 @@ The data flows as follows:
     * **Acknowledgments:** A job is removed from the queue only after a filter successfully processes it and sends an `basic_ack`. If a filter crashes mid-process, the message is automatically re-queued and processed by another instance.
 * [cite_start]**Asynchronous Processing:** The user's upload request returns in milliseconds with a `200 OK`[cite: 915], even if the processing takes few seconds. This provides a responsive user experience.
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 * **Python 3.x**
 * **Flask**: To create the API Pump (`app.py`).
@@ -112,7 +112,7 @@ python watermark_filter.py
 
 All three services are now running and waiting.
 
-## 🧪 How to Test
+##  How to Test
 
 Open a **fourth terminal** to send an image. Make sure you have a test image (e.g., `test.png`) in your project directory.
 
