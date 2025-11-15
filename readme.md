@@ -18,13 +18,8 @@ The data flows as follows:
 
 ### Flow Diagram
 
-```
-          [POST /upload]
-               |
-               v
-[User] --> [Pump: app.py] --(Job 1)--> [Pipe 1: upload_queue] --(Msg)--> [Filter 1: resize_filter.py] --(Job 2)--> [Pipe 2: watermark_queue] --(Msg)--> [Filter 2: watermark_filter.py] --> [Final Image]
-(Flask API)     (RabbitMQ)            (Consumer)              (RabbitMQ)             (Consumer)
-```
+<img width="964" height="362" alt="image" src="https://github.com/user-attachments/assets/384bc59c-bd1e-42d9-935a-3650293b2c3e" />
+
 
 ##  Architectural Concepts
 
