@@ -1,12 +1,12 @@
 # Asynchronous Image Processing Pipeline
 
-[cite_start]This project is a demonstration of the **Pipe-and-Filter** architectural pattern [cite: 2994] [cite_start]for the CSL7090: Software & Data Engineering course[cite: 2741, 2742].
+This project is a demonstration of the **Pipe-and-Filter** architectural pattern for the CSL7090: Software & Data Engineering course.
 
 It implements a scalable, asynchronous pipeline in Python to process image uploads. Instead of a single, monolithic application, the system is broken down into decoupled services that communicate using a RabbitMQ message broker.
 
 ##  Architectural Overview
 
-[cite_start]The system follows a classic **Pipe-and-Filter** design[cite: 2953, 2957, 2994]. The "pipes" are not in-memory function calls but **asynchronous message queues** (RabbitMQ), which makes the system resilient, scalable, and modifiable.
+The system follows a classic **Pipe-and-Filter** design. The "pipes" are not in-memory function calls but **asynchronous message queues** (RabbitMQ), which makes the system resilient, scalable, and modifiable.
 
 The data flows as follows:
 
@@ -28,15 +28,15 @@ The data flows as follows:
 
 ##  Architectural Concepts
 
-[cite_start]This project is a  application for implementing key software architecture principles for SDE assignment  [cite: 2] [cite_start]and our course slides[cite: 2950, 2952]:
+This project is a  application for implementing key software architecture principles for SDE assignment and our course slides:
 
-* [cite_start]**Pipe-and-Filter Pattern:** The main architecture[cite: 2994]. Each processing step is a filter, and queues act as pipes.
-* **Decoupling & Modifiability:** Filters are completely independent. [cite_start]We can add a new `FaceBlurFilter` between the resize and watermark steps without modifying *any* existing code—we just plugin  the queue outputs[cite: 1794].
-* **Scalability:** The `resize_filter.py` is slow? We can run multiple instances of it. RabbitMQ will automatically load-balance jobs across all running consumers . [cite_start]This allows us to scale only the bottleneck, which one of the essential attribute of good architecture[cite: 1420].
+* **Pipe-and-Filter Pattern:** The main architecture. Each processing step is a filter, and queues act as pipes.
+* **Decoupling & Modifiability:** Filters are completely independent.We can add a new `FaceBlurFilter` between the resize and watermark steps without modifying *any* existing code—we just plugin  the queue outputs.
+* **Scalability:** The `resize_filter.py` is slow? We can run multiple instances of it. RabbitMQ will automatically load-balance jobs across all running consumers .This allows us to scale only the bottleneck, which one of the essential attribute of good architecture.
 * **Reliability & Fault Tolerance:**
-    * [cite_start]**Persistence:** By declaring queues as `durable=True` and marking messages as persistent, jobs are not lost even if the RabbitMQ broker restarts[cite: 95].
+    * **Persistence:** By declaring queues as `durable=True` and marking messages as persistent, jobs are not lost even if the RabbitMQ broker restarts.
     * **Acknowledgments:** A job is removed from the queue only after a filter successfully processes it and sends an `basic_ack`. If a filter crashes mid-process, the message is automatically re-queued and processed by another instance.
-* [cite_start]**Asynchronous Processing:** The user's upload request returns in milliseconds with a `200 OK`[cite: 915], even if the processing takes few seconds. This provides a responsive user experience.
+* **Asynchronous Processing:** The user's upload request returns in milliseconds with a `200 OK`, even if the processing takes few seconds. This provides a responsive user experience.
 
 ##  Technology Stack
 
