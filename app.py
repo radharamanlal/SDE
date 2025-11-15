@@ -6,7 +6,7 @@ import json
 
 #----- COnfiguration -----#
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = r'.\uploads'
+app.config['UPLOAD_FOLDER'] = 'uploads'
 RABBITMQ_HOST = 'localhost'
 UPLOAD_QUEUE = 'upload_queue'
 

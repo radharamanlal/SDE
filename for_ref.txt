@@ -1,0 +1,17 @@
+#demo1.py
+The TEST_IMAGE_PATH = 'test_images/1.jpg' line points to a single file. 
+The UPLOAD_IMG_NO = 5 variable just tells the upload_images function to loop 5 times, uploading that same file each time.
+
+Why does it do this?
+This is done on purpose to demonstrate the Performance (Scalability) quality attribute.
+To have a "fair race" and prove that 3 filters are faster than 1, we must give them the exact same amount of work.
+
+If you upload 5 different images, one might be 10MB and another might be 50KB. 
+The total time would be unpredictable. By uploading the same 1MB image 5 times, we create a consistent workload and can scientifically measure the speedup.
+
+#demo2.py
+Here is the testing script for the second quality attribute: Availability (Fault Tolerance).
+
+This script will run a live experiment to prove that your architecture is resilient.
+It will start multiple, redundant filters, give them work, and then suddenly kill one of them (a "fault"). 
+You will see that the remaining "spare" filter takes over and no work is lost, demonstrating the "Active Redundancy".
