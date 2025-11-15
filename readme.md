@@ -130,6 +130,37 @@ curl -X POST -F "file=@test.png" [http://127.0.0.1:5000/upload](http://127.0.0.1
     * `./resized_images/` will have the resized version.
     * `./watermarked/` will have the final, watermarked version.
 
+Demonstrating the Quality Attributes
+
+This project includes scripts to automatically demonstrate the architectural benefits.
+
+Before running any demo, make sure app.py (the Pump) is running in its own terminal!
+
+1. Demo: Performance (Scalability)
+
+This script proves the system gets faster as you add resources.
+
+python demo1.py
+
+
+The script will run a test with 1 filter, then a test with 3 filters, and print a report showing the speed-up.
+
+2. Demo: Availability (Fault Tolerance)
+
+This script proves the system is resilient to failure. It will start two filters, give them work, and then kill one to show the "spare" takes over.
+
+python demo2.py
+
+
+3. Demo: Modifiability (Walkthrough)
+
+This script is for blurring image which will be replace with any one filter (either image_resized.py, or water_mark.py) 
+just replace any of the filter only name of filter to be changed no code chnage is required.
+
+python blur_filter.py
+
+
+
 ##  Future Improvements
 
 This project demonstrates the concept of pipe and filter, but a production-ready system would require significant effort in following aspects:
