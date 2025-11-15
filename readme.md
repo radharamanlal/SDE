@@ -26,16 +26,16 @@ The data flows as follows:
 This project is a  application for implementing key software architecture principles for SDE assignment and our course slides:
 
 * **Pipe-and-Filter Pattern:** The main architecture. Each processing step is a filter, and queues act as pipes.
-* **Decoupling & Modifiability:** Filters are completely independent.We can add a new `FaceBlurFilter` between the resize and watermark steps without modifying *any* existing code—we just plugin  the queue outputs.
-* **Scalability:** The `resize_filter.py` is slow? We can run multiple instances of it. RabbitMQ will automatically load-balance jobs across all running consumers .This allows us to scale only the bottleneck, which one of the essential attribute of good architecture.
+* **Decoupling & Modifiability:** Filters are completely independent.We can add a new `convert_grayscale` or between the resize and watermark steps without modifying *any* existing code—we just plugin  the queue outputs. Or preprocessing of image for classification training or for predicting form trained model. We can send it to other pipelines.
+* **Scalability:** The `resize_filter.py` is slow? We can run multiple instances of it. RabbitMQ will automatically load-balance jobs across all running consumers .This allows us to scale only the bottleneck, which one of the essential attribute of good architecture. 
 * **Reliability & Fault Tolerance:**
     * **Persistence:** By declaring queues as `durable=True` and marking messages as persistent, jobs are not lost even if the RabbitMQ broker restarts.
     * **Acknowledgments:** A job is removed from the queue only after a filter successfully processes it and sends an `basic_ack`. If a filter crashes mid-process, the message is automatically re-queued and processed by another instance.
-* **Asynchronous Processing:** The user's upload request returns in milliseconds with a `200 OK`, even if the processing takes few seconds. This provides a responsive user experience.
+* **Asynchronous Processing:** The user's upload request returns in milliseconds with a `OK`, even if the processing takes few seconds. This provides a responsive user experience.
 
 ##  Technology Stack
 
-* **Python 3.x**
+* **Python 3**
 * **Flask**: To create the API Pump (`app.py`).
 * **Pika**: The standard Python client for RabbitMQ.
 * **Pillow (PIL)**: For all image processing (resize, watermark).
