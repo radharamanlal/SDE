@@ -16,9 +16,14 @@ The data flows as follows:
 4.  **Pipe 2 (`watermark_queue`):** A durable queue that holds jobs for the watermarking stage.
 5.  **Filter 2 / Sink (`watermark_filter.py`):** A second consumer script. It listens to the `watermark_queue`, adds a text watermark to the resized image, and saves the final result to the `watermarked/` directory.
 
-### Flow Diagram
+### PIPE & FILTER ARCHITECTURE DIAGRAM (Flow Diagram)
 
 <img width="964" height="362" alt="image" src="https://github.com/user-attachments/assets/384bc59c-bd1e-42d9-935a-3650293b2c3e" />
+
+### Sequence Diagram
+
+<img width="1043" height="738" alt="image" src="https://github.com/user-attachments/assets/4e3011e2-17b2-4a28-8118-4ca85e4b6301" />
+
 
 
 ##  Architectural Concepts
@@ -145,6 +150,15 @@ python demo1.py
 <img width="1017" height="467" alt="image" src="https://github.com/user-attachments/assets/1e5bd566-f31a-4d65-8fa0-ae511faab66e" />
 
 The script will run a test with 1 filter, then a test with 3 filters, and print a report showing the speed-up.
+
+|TABLE: MAJOR COMPONENTS|
+|Component	|Description|
+|Pump (Flask API)|	Receives uploads and enqueues jobs|
+|Filter 1 – Resize|	Resizes images to standardized dimensions|
+|Filter 2 – Watermark|	Adds a watermark and finalizes output|
+|Pipes (RabbitMQ queues)|	Durable message transport|
+|Sink (File storage)|	Stores final processed output|
+
 
 ### 2. Demo: Availability (Fault Tolerance)
 
