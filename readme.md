@@ -49,20 +49,13 @@ This project is a  application for implementing key software architecture princi
 
 ##  Technology Stack
 
-* **Python 3**
-* **Flask**: To create the API Pump (`app.py`).
-* **Pika**: The standard Python client for RabbitMQ.
-* **Pillow (PIL)**: For all image processing (resize, watermark).
-* **RabbitMQ**: The message broker (the "Pipes").
-* **Docker**: Used to easily run the RabbitMQ broker.
-
 |Technology|	Purpose|
 |-----------|---------|
 |Python 3.x|	Core implementation language|
 |Flask|	To create the API Pump (`app.py`). REST entry point (Pump)|
-|RabbitMQ|	Message broker (Pipes)|
+|RabbitMQ|	Message broker (`Pipes`)|
 |Pika|	The standard Python client for `RabbitMQ`|
-|Pillow (PIL)|	Image manipulation|
+|Pillow (PIL)|	Image manipulation (`resize`, `watermark`)|
 |Docker|	RabbitMQ provisioning|
 
 
