@@ -25,11 +25,14 @@ The data flows as follows:
 |Sink (File storage)|	Stores final processed output|
 
 
-### PIPE & FILTER ARCHITECTURE DIAGRAM (Flow Diagram)
+### Pipe & Filter Architecture Diagram (Flow Diagram)
+
 
 <img width="964" height="362" alt="image" src="https://github.com/user-attachments/assets/384bc59c-bd1e-42d9-935a-3650293b2c3e" />
 
+
 ### Sequence Diagram
+
 
 <img width="1043" height="738" alt="image" src="https://github.com/user-attachments/assets/4e3011e2-17b2-4a28-8118-4ca85e4b6301" />
 
