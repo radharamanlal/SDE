@@ -17,7 +17,7 @@ The data flows as follows:
 5.  **Filter 2 / Sink (`watermark_filter.py`):** A second consumer script. It listens to the `watermark_queue`, adds a text watermark to the resized image, and saves the final result to the `watermarked/` directory.
 
 |Component	|Description|
--------------------------
+|-----------|-----------|
 |Pump (Flask API)|	Receives uploads and enqueues jobs|
 |Filter 1 – Resize|	Resizes images to standardized dimensions|
 |Filter 2 – Watermark|	Adds a watermark and finalizes output|
