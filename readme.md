@@ -151,13 +151,11 @@ python demo1.py
 
 The script will run a test with 1 filter, then a test with 3 filters, and print a report showing the speed-up.
 
-|TABLE: MAJOR COMPONENTS|
-|Component	|Description|
-|Pump (Flask API)|	Receives uploads and enqueues jobs|
-|Filter 1 – Resize|	Resizes images to standardized dimensions|
-|Filter 2 – Watermark|	Adds a watermark and finalizes output|
-|Pipes (RabbitMQ queues)|	Durable message transport|
-|Sink (File storage)|	Stores final processed output|
+| Number of Filters | Response Time |
+|-------------------|---------------|
+| Time with 1 Filter | 10.93 seconds  |
+| Time with 3 Filters | 10.95 seconds |
+
 
 
 ### 2. Demo: Availability (Fault Tolerance)
