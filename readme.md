@@ -157,7 +157,7 @@ Before running any demo, make sure app.py (the Pump) is running in its own termi
 
 This script proves the system gets faster as you add resources.
 
-python demo1.py
+`python demo1.py`
 
 <img width="1017" height="467" alt="image" src="https://github.com/user-attachments/assets/1e5bd566-f31a-4d65-8fa0-ae511faab66e" />
 
@@ -174,7 +174,7 @@ The script will run a test with 1 filter, then a test with 3 filters, and print 
 
 This script proves the system is resilient to failure. It will start two filters, give them work, and then kill one to show the "spare" takes over.
 
-python demo2.py
+`python demo2.py`
 
 
 ### 3. Demo: Modifiability (Walkthrough)
@@ -182,7 +182,7 @@ python demo2.py
 This script is for blurring image which will be replace with any one filter (either image_resized.py, or water_mark.py) 
 just replace any of the filter only name of filter to be changed no code chnage is required.
 
-python blur_filter.py
+`python blur_filter.py`
 
 
 
