@@ -56,6 +56,16 @@ This project is a  application for implementing key software architecture princi
 * **RabbitMQ**: The message broker (the "Pipes").
 * **Docker**: Used to easily run the RabbitMQ broker.
 
+|Technology|	Purpose|
+|-----------|---------|
+|Python 3.x|	Core implementation language|
+|Flask|	To create the API Pump (`app.py`). REST entry point (Pump)|
+|RabbitMQ|	Message broker (Pipes)|
+|Pika|	The standard Python client for `RabbitMQ`|
+|Pillow (PIL)|	Image manipulation|
+|Docker|	RabbitMQ provisioning|
+
+
 ##  Setup & Installation
 
 ### 1. Clone the Repository
